@@ -31,8 +31,9 @@ public class FileSystem {
                             "Выбор типа", JOptionPane.QUESTION_MESSAGE, null, typesOfFile, typesOfFile[0]);
                     if (!typeSelecting.isEmpty()) {
                         DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(m + "." + typeSelecting, false);
-                        currentNode.add(newNode);
-                        addToDisc(newNode);
+                        File file = new File(m,typeSelecting);
+                        currentNode.add(file.getFile());
+                        addToDisc(file.getFile());
                     } else
                         JOptionPane.showMessageDialog(frame, "Тип файла не выбран! Файл не создан.");
                 } else {
@@ -45,9 +46,10 @@ public class FileSystem {
             String m = JOptionPane.showInputDialog(frame, "Введите название папки");
             if (!m.isEmpty()) {
                 DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-                if (currentNode.getAllowsChildren())
-                    currentNode.add(new DefaultMutableTreeNode(m, true));
-                else
+                if (currentNode.getAllowsChildren()) {
+                    Folder folder = new Folder(m);
+                    currentNode.add(folder.getFolder());
+                } else
                     JOptionPane.showMessageDialog(frame,
                             "Нельзя создавать папку в файле, выберите папку! Папка не создана.");
             } else
