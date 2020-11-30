@@ -8,7 +8,7 @@ public class File {
     private boolean isFile;
 
     public File(String name, String expansion) {
-        newNode = new DefaultMutableTreeNode(name + "." + expansion, isFile);
+        newNode = new DefaultMutableTreeNode(name + "." + expansion, false);
         isFile = true;
     }
 
